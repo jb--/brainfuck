@@ -1,7 +1,6 @@
 /*
  * Copyright 2020 Joerg Bartnick: 
- * Introduced changes:
- * - replace BRAINFUCK by HTML
+ * Based on the Brainfuck interpreter by
  * 
  * Copyright 2016 Fabian Mastenbroek
  *
