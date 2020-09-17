@@ -61,6 +61,12 @@ $ make
 
 The HTML programming language is based on the implementation of the brainfuck interpreter by [Fabian Mastenbroek](https://github.com/fabianishere/brainfuck). The intention behind this project is that next time someone mentions that HTML is not a programming language, I can prove them wrong.
 
+You can convert many brainfuck programs to HTML programs by running 
+```sh
+$ sed -i ''  -e 's/>/L/g' -e 's/</H/g' -e 's/\+/t/g' -e 's/\-/m/g' -e 's/\./T/g' -e 's/,/M/g' -e 's/\[/h/g' -e 's/\]/l/g' *.bf
+```
+on your brainfuck source file. 
+
 ## License
 The code is released under the Apache License version 2.0. See [LICENSE.txt](/LICENSE.txt).
 
