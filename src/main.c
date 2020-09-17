@@ -57,6 +57,8 @@ void print_version()
 {
     fprintf(stderr, "html %d.%d.%d (%s, %s)\n", HTML_VERSION_MAJOR,
             HTML_VERSION_MINOR, HTML_VERSION_PATCH, __DATE__, __TIME__);
+    fprintf(stderr, "Copyright (c) 2020 Jorg Bartnick.\n");
+    fprintf(stderr, "Based on the brainfuck implementation by Famiab Mastenbroek.\n");
     fprintf(stderr, "Copyright (c) 2016 Fabian Mastenbroek.\n");
     fprintf(stderr, "Distributed under the Apache License Version 2.0.\n");
 }
