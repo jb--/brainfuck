@@ -1,6 +1,5 @@
-html
-[![Build Status](https://github.com/fabianishere/html/workflows/Build/badge.svg)](https://github.com/fabianishere/html/actions?query=workflow%3ABuild)
-===========
+The HTML Programming Language
+=============================
 Html interpreter written in C.
 
 ## Usage
@@ -38,9 +37,9 @@ authors of these programs where possible.
 ## Getting the source
 Download the source code by running the following code in your command prompt:
 ```sh
-$ git clone https://github.com/fabianishere/html.git
+$ git clone https://github.com/jb--/brainfuck.git
 ```
-or simply [grab](https://github.com/fabianishere/html/archive/master.zip) a copy of the source code as a Zip file.
+or simply [grab](https://github.com/jb--/html/archive/master.zip) a copy of the source code as a Zip file.
 
 ## Building
 Create the build directory.
@@ -58,6 +57,10 @@ and finally, build it using the building system you chose (e.g. Make):
 $ make
 ```
 
+## Attribution
+
+The HTML programming language is based on the implementation of the brainfuck interpreter by [Fabian Mastenbroek](https://github.com/fabianishere/brainfuck). The intention behind this project is that next time someone mentions that HTML is not a programming language, I can prove them wrong.
+
 ## License
 The code is released under the Apache License version 2.0. See [LICENSE.txt](/LICENSE.txt).
 
@@ -69,3 +72,4 @@ The code is released under the Apache License version 2.0. See [LICENSE.txt](/LI
     Alex Burka https://github.com/durka
 	outis https://github.com/outis
 	rien333 https://github.com/rien333
+    Jorg Bartnick https://github.com/jb--
