@@ -1,3 +1,8 @@
+\"  Copyright 2020 Jorg Bartnick
+\"  Introduced changes:
+\"  - Replaced BRAINFUCK by HTML
+\"
+\"
 \"  Copyright 2016 Fabian Mastenbroek
 \"
 \" Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,20 +17,20 @@
 \" See the License for the specific language governing permissions and
 \" limitations under the License.
 .Dd March 09, 2019
-.Dt brainfuck 1
+.Dt html 1
 .Os UNIX
 .Sh NAME
-.Nm brainfuck
-.Nd brainfuck interpreter
+.Nm html
+.Nd html interpreter
 .Sh SYNOPSIS
 .Nm
 .Op Fl evh                \" [-veh]
 .Op Ar
 .Sh DESCRIPTION
-A brainfuck interpreter written in C.
+A html interpreter written in C.
 .Pp
 .Sh SYNTAX
-The brainfuck syntax is described below:
+The html syntax is described below:
 .Pp
 .Bl -tag -width -indent
 .It Sy >
@@ -61,14 +66,14 @@ Show help message
 .Pp
 .Sh FILES  
 .Bl -tag -width -indent
-.It Pa /usr/local/bin/brainfuck
-The main brainfuck executable.
-.It Pa /usr/local/lib/libbrainfuck.a
+.It Pa /usr/local/bin/html
+The main html executable.
+.It Pa /usr/local/lib/libhtml.a
 Static library to run interpreter programmatically.
-.It Pa /usr/local/include/brainfuck/brainfuck.h
+.It Pa /usr/local/include/html/html.h
 Application programming interface of the library.
-.It Pa /usr/local/man/man1/brainfuck.1
+.It Pa /usr/local/man/man1/html.1
 This man file.
-.It Pa /usr/local/share/brainfuck/examples
-Directory containing numerous brainfuck example programs.
+.It Pa /usr/local/share/html/examples
+Directory containing numerous html example programs.
 .El

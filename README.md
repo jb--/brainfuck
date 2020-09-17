@@ -1,10 +1,10 @@
-brainfuck
-[![Build Status](https://github.com/fabianishere/brainfuck/workflows/Build/badge.svg)](https://github.com/fabianishere/brainfuck/actions?query=workflow%3ABuild)
+html
+[![Build Status](https://github.com/fabianishere/html/workflows/Build/badge.svg)](https://github.com/fabianishere/html/actions?query=workflow%3ABuild)
 ===========
-Brainfuck interpreter written in C.
+Html interpreter written in C.
 
 ## Usage
-    brainfuck [-veh] file...
+    html [-veh] file...
 	-e --eval	run code directly
 	-v --version	show version information
 	-h --help	show a help message.
@@ -16,31 +16,31 @@ We also provide a C api:
 ``` c
 #include <stdio.h>
 #include <stdlib.h>
-#include <brainfuck.h>
+#include <html.h>
     
 int main() {
-	BrainfuckState *state = brainfuck_state();
-	BrainfuckExecutionContext *context = brainfuck_context(BRAINFUCK_TAPE_SIZE);
-	BrainfuckInstruction *instruction = brainfuck_parse_string(",+++++.");
- 	brainfuck_add(state, instruction);
- 	brainfuck_execute(state->root, context);
-	brainfuck_destroy_context(context);
- 	brainfuck_destroy_state(state);
+	HtmlState *state = html_state();
+	HtmlExecutionContext *context = html_context(HTML_TAPE_SIZE);
+	HtmlInstruction *instruction = html_parse_string(",+++++.");
+ 	html_add(state, instruction);
+ 	html_execute(state->root, context);
+	html_destroy_context(context);
+ 	html_destroy_state(state);
 	return EXIT_SUCCESS;
 }
 ```
 
 ## Examples
 The [examples/](/examples) directory contains a large amount of 
-brainfuck example programs. We have tried to attribute the original
+html example programs. We have tried to attribute the original
 authors of these programs where possible.
 
 ## Getting the source
 Download the source code by running the following code in your command prompt:
 ```sh
-$ git clone https://github.com/fabianishere/brainfuck.git
+$ git clone https://github.com/fabianishere/html.git
 ```
-or simply [grab](https://github.com/fabianishere/brainfuck/archive/master.zip) a copy of the source code as a Zip file.
+or simply [grab](https://github.com/fabianishere/html/archive/master.zip) a copy of the source code as a Zip file.
 
 ## Building
 Create the build directory.
@@ -48,7 +48,7 @@ Create the build directory.
 $ mkdir build
 $ cd build
 ```
-Brainfuck requires CMake and a C compiler (e.g. Clang or GCC) in order to run. It also depends on [libedit](http://thrysoee.dk/editline/), which is available in the main repositories of most Linux distributions (e.g. as [libedit-dev](https://packages.debian.org/stretch/libedit-dev) on Debian/Ubuntu) and comes with the macOS XCode command line tools. 
+Html requires CMake and a C compiler (e.g. Clang or GCC) in order to run. It also depends on [libedit](http://thrysoee.dk/editline/), which is available in the main repositories of most Linux distributions (e.g. as [libedit-dev](https://packages.debian.org/stretch/libedit-dev) on Debian/Ubuntu) and comes with the macOS XCode command line tools. 
 Then, simply create the Makefiles:
 ```sh
 $ cmake ..

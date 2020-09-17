@@ -1,4 +1,8 @@
 /*
+ * Copyright 2020 Joerg Bartnick: 
+ * Introduced changes:
+ * - replace BRAINFUCK by HTML
+ * 
  * Copyright 2016 Fabian Mastenbroek
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,33 +17,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#ifndef BRAINFUCK_H
-#define BRAINFUCK_H
+#ifndef HTML_H
+#define HTML_H
 
-#define BRAINFUCK_TAPE_SIZE 30000
+#define HTML_TAPE_SIZE 30000
 /* 1: EOF leaves cell unchanged; 0: EOF == 0; 1: EOF ==  1 */
-#define BRAINFUCK_EOF_BEHAVIOR 1
+#define HTML_EOF_BEHAVIOR 1
 
-#define BRAINFUCK_TOKEN_PLUS 't'
-#define BRAINFUCK_TOKEN_MINUS 'm'
-#define BRAINFUCK_TOKEN_PREVIOUS 'H'
-#define BRAINFUCK_TOKEN_NEXT 'L'
-#define BRAINFUCK_TOKEN_OUTPUT 'T'
-#define BRAINFUCK_TOKEN_INPUT 'M'
-#define BRAINFUCK_TOKEN_LOOP_START 'h'
-#define BRAINFUCK_TOKEN_LOOP_END 'l'
-#ifdef BRAINFUCK_EXTENSION_DEBUG
-#define BRAINFUCK_TOKEN_BREAK '#'
+#define HTML_TOKEN_PLUS 't'
+#define HTML_TOKEN_MINUS 'm'
+#define HTML_TOKEN_PREVIOUS 'H'
+#define HTML_TOKEN_NEXT 'L'
+#define HTML_TOKEN_OUTPUT 'T'
+#define HTML_TOKEN_INPUT 'M'
+#define HTML_TOKEN_LOOP_START 'h'
+#define HTML_TOKEN_LOOP_END 'l'
+#ifdef HTML_EXTENSION_DEBUG
+#define HTML_TOKEN_BREAK '#'
 #else
-#define BRAINFUCK_TOKEN_BREAK -10
+#define HTML_TOKEN_BREAK -10
 #endif
 
 #define READLINE_HIST_SIZE 20
 
 /**
- * Represents a brainfuck instruction.
+ * Represents a html instruction.
  */
-typedef struct BrainfuckInstruction
+typedef struct HtmlInstruction
 {
     /**
 	 * The difference between the value of the byte at the currect pointer and
@@ -53,62 +57,62 @@ typedef struct BrainfuckInstruction
     /**
 	 * The next instruction in the linked list.
 	 */
-    struct BrainfuckInstruction *next;
+    struct HtmlInstruction *next;
     /**
 	 * The previous instruction in the linked list.
 	 */
-    struct BrainfuckInstruction *previous;
+    struct HtmlInstruction *previous;
     /**
 	 * The first instruction of a loop if this instruction is a loop. Otherwise
 	 * 	<code>NULL</code>
 	 */
-    struct BrainfuckInstruction *loop;
-} BrainfuckInstruction;
+    struct HtmlInstruction *loop;
+} HtmlInstruction;
 
 /**
  * The state structure contains the head and the root of the linked list containing
  * 	the instructions of the program.
  */
-typedef struct BrainfuckState
+typedef struct HtmlState
 {
     /**
 	 * The root instruction of the instruction linked list.
 	 */
-    struct BrainfuckInstruction *root;
+    struct HtmlInstruction *root;
     /**
 	 * The head instruction of the instruction linked list.
 	 */
-    struct BrainfuckInstruction *head;
-} BrainfuckState;
+    struct HtmlInstruction *head;
+} HtmlState;
 
 /**
- * The callback that will be invoked when the BRAINFUCK_TOKEN_OUTPUT token is found.
+ * The callback that will be invoked when the HTML_TOKEN_OUTPUT token is found.
  * 
  * @param chr The value of the current cell.
  */
-typedef int (*BrainfuckOutputHandler)(int chr);
+typedef int (*HtmlOutputHandler)(int chr);
 
 /**
- * The callback that will be invoked when the BRAINFUCK_TOKEN_INPUT token is found.
+ * The callback that will be invoked when the HTML_TOKEN_INPUT token is found.
  * 
  * @return The character that is read.
  */
-typedef char (*BrainfuckInputHandler)(void);
+typedef char (*HtmlInputHandler)(void);
 
 /**
- * This structure is used as a layer between a brainfuck program and
+ * This structure is used as a layer between a html program and
  * 	the outside. It allows control over input, output and memory.
  */
-typedef struct BrainfuckExecutionContext
+typedef struct HtmlExecutionContext
 {
     /**
-	 * The callback that will be invoked when the BRAINFUCK_TOKEN_OUTPUT token is found.
+	 * The callback that will be invoked when the HTML_TOKEN_OUTPUT token is found.
 	 */
-    BrainfuckOutputHandler output_handler;
+    HtmlOutputHandler output_handler;
     /**
-	 * The callback that will be invoked when the BRAINFUCK_TOKEN_INPUT token is found.
+	 * The callback that will be invoked when the HTML_TOKEN_INPUT token is found.
 	 */
-    BrainfuckInputHandler input_handler;
+    HtmlInputHandler input_handler;
     /**
 	 * An array containing the memory cells the program can use.
 	 */
@@ -125,19 +129,19 @@ typedef struct BrainfuckExecutionContext
 	 * A flag that, if set to true, indicates that execution should stop.
 	 */
     int shouldStop;
-} BrainfuckExecutionContext;
+} HtmlExecutionContext;
 
 /**
  * Creates a new state.
  */
-BrainfuckState *brainfuck_state();
+HtmlState *html_state();
 
 /**
  * Creates a new context.
  *
  * @param size The size of the tape.
  */
-BrainfuckExecutionContext *brainfuck_context(int);
+HtmlExecutionContext *html_context(int);
 
 /**
  * Removes the given instruction from the linked list.
@@ -146,7 +150,7 @@ BrainfuckExecutionContext *brainfuck_context(int);
  * @param instruction The instruction to remove.
  * @return The instruction that is removed.
  */
-BrainfuckInstruction *brainfuck_remove(struct BrainfuckState *, struct BrainfuckInstruction *);
+HtmlInstruction *html_remove(struct HtmlState *, struct HtmlInstruction *);
 
 /**
  * Adds an instruction to the instruction list.
@@ -155,7 +159,7 @@ BrainfuckInstruction *brainfuck_remove(struct BrainfuckState *, struct Brainfuck
  * @param instruction The instruction to add.
  * @return The instruction that is given.
  */
-BrainfuckInstruction *brainfuck_add(struct BrainfuckState *state, struct BrainfuckInstruction *);
+HtmlInstruction *html_add(struct HtmlState *state, struct HtmlInstruction *);
 
 /**
  * Adds an instruction to the front of the instruction list.
@@ -164,7 +168,7 @@ BrainfuckInstruction *brainfuck_add(struct BrainfuckState *state, struct Brainfu
  * @param instruction The instruction to add.
  * @return The instruction that is given.
  */
-BrainfuckInstruction *brainfuck_add_first(struct BrainfuckState *state, struct BrainfuckInstruction *);
+HtmlInstruction *html_add_first(struct HtmlState *state, struct HtmlInstruction *);
 
 /**
  * Adds an instruction to the instruction list.
@@ -174,8 +178,8 @@ BrainfuckInstruction *brainfuck_add_first(struct BrainfuckState *state, struct B
  * @param instruction The instruction to add.
  * @return The instruction that is given.
  */
-BrainfuckInstruction *brainfuck_insert_before(struct BrainfuckState *, struct BrainfuckInstruction *,
-                                              struct BrainfuckInstruction *);
+HtmlInstruction *html_insert_before(struct HtmlState *, struct HtmlInstruction *,
+                                    struct HtmlInstruction *);
 
 /**
  * Adds an instruction to the instruction list.
@@ -185,8 +189,8 @@ BrainfuckInstruction *brainfuck_insert_before(struct BrainfuckState *, struct Br
  * @param instruction The instruction to add.
  * @return The instruction that is given.
  */
-BrainfuckInstruction *brainfuck_insert_after(struct BrainfuckState *, struct BrainfuckInstruction *,
-                                             struct BrainfuckInstruction *);
+HtmlInstruction *html_insert_after(struct HtmlState *, struct HtmlInstruction *,
+                                   struct HtmlInstruction *);
 
 /**
  * Reads a character, converts it to an instruction and repeats until the EOF character
@@ -195,7 +199,7 @@ BrainfuckInstruction *brainfuck_insert_after(struct BrainfuckState *, struct Bra
  * @param stream The stream to read from.
  * @param The head of the linked list containing the instructions.
  */
-BrainfuckInstruction *brainfuck_parse_stream(FILE *);
+HtmlInstruction *html_parse_stream(FILE *);
 
 /**
  * Reads a character, converts it to an instruction and repeats until the given character
@@ -205,7 +209,7 @@ BrainfuckInstruction *brainfuck_parse_stream(FILE *);
  * @param until If this character is found in the stream, we will quit reading and return.
  * @param The head of the linked list containing the instructions.
  */
-BrainfuckInstruction *brainfuck_parse_stream_until(FILE *, int);
+HtmlInstruction *html_parse_stream_until(FILE *, int);
 
 /**
  * Reads a character, converts it to an instruction and repeats until the string ends
@@ -214,7 +218,7 @@ BrainfuckInstruction *brainfuck_parse_stream_until(FILE *, int);
  * @param str The string to read from.
  * @param The head of the linked list containing the instructions.
  */
-BrainfuckInstruction *brainfuck_parse_string(char *);
+HtmlInstruction *html_parse_string(char *);
 
 /**
  * Reads a character, converts it to an instruction and repeats until the string ends
@@ -226,7 +230,7 @@ BrainfuckInstruction *brainfuck_parse_string(char *);
  *	When <code>-1</code> is given, it will stop at the end of the string.
  * @param The head of the linked list containing the instructions.
  */
-BrainfuckInstruction *brainfuck_parse_substring(char *, int, int);
+HtmlInstruction *html_parse_substring(char *, int, int);
 
 /**
  * Reads a character, converts it to an instruction and repeats until the string ends
@@ -241,7 +245,7 @@ BrainfuckInstruction *brainfuck_parse_substring(char *, int, int);
  *	When <code>-1</code> is given, it will stop at the end of the string.
  * @param The head of the linked list containing the instructions.
  */
-BrainfuckInstruction *brainfuck_parse_substring_incremental(char *, int *, int);
+HtmlInstruction *html_parse_substring_incremental(char *, int *, int);
 
 /**
  * Converts the given character to an instruction.
@@ -249,35 +253,35 @@ BrainfuckInstruction *brainfuck_parse_substring_incremental(char *, int *, int);
  * @param c The character to convert.
  * @param The character that's converted into an instruction.
  */
-BrainfuckInstruction *brainfuck_parse_character(char);
+HtmlInstruction *html_parse_character(char);
 
 /**
  * Destroys the given instruction.
  * 
  * @param instruction The instruction to destroy.
  */
-void brainfuck_destroy_instruction(struct BrainfuckInstruction *);
+void html_destroy_instruction(struct HtmlInstruction *);
 
 /**
  * Destroys a linked list containing instructions.
  * 
  * @param head The start of the instruction list.
  */
-void brainfuck_destroy_instructions(struct BrainfuckInstruction *);
+void html_destroy_instructions(struct HtmlInstruction *);
 
 /**
  * Destroys a state.
  * 
  * @param state The state to destroy
  */
-void brainfuck_destroy_state(struct BrainfuckState *);
+void html_destroy_state(struct HtmlState *);
 
 /**
  * Destroys a context.
  * 
  * @param context The context to destroy
  */
-void brainfuck_destroy_context(struct BrainfuckExecutionContext *);
+void html_destroy_context(struct HtmlExecutionContext *);
 
 /**
  * Executes the given linked list containing instructions.
@@ -287,7 +291,7 @@ void brainfuck_destroy_context(struct BrainfuckExecutionContext *);
  * @param context The context of this execution that contains the tape and
  *	other execution related variables.
  */
-void brainfuck_execute(struct BrainfuckInstruction *, struct BrainfuckExecutionContext *);
+void html_execute(struct HtmlInstruction *, struct HtmlExecutionContext *);
 
 /**
  * Stops the currently running program referenced by the given execution context.
@@ -295,12 +299,12 @@ void brainfuck_execute(struct BrainfuckInstruction *, struct BrainfuckExecutionC
  * @param context The context of this execution that contains the tape and
  *	other execution related variables.
  */
-void brainfuck_execution_stop(BrainfuckExecutionContext *);
+void html_execution_stop(HtmlExecutionContext *);
 
 /**
  * Reads exactly one char from stdin.
  * @return The character read from stdin. 
  */
-char brainfuck_getchar(void);
+char html_getchar(void);
 
-#endif /* BRAINFUCK_H */
+#endif /* HTML_H */
