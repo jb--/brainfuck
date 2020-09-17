@@ -31,25 +31,25 @@ A html interpreter written in C.
 The html syntax is described below:
 .Pp
 .Bl -tag -width -indent
-.It Sy >
+.It Sy L
 Increment the data pointer (to point to the next cell to the right).
-.It Sy <
+.It Sy H
 Decrement the data pointer (to point to the next cell to the left).
-.It Sy +
+.It Sy t
 Increment (increase by one) the byte at the data pointer.
-.It Sy -
+.It Sy m
 Decrement (decrease by one) the byte at the data pointer.
-.It Sy \&.
+.It Sy T
 Output the byte at the data pointer as an ASCII encoded character.
-.It Sy \&,
+.It Sy M
 Accept one byte of input, storing its value in the byte at the data pointer.
-.It Sy \&[
+.It Sy h
 If the byte at the data pointer is zero, then instead of moving the instruction pointer forward to the next command, jump it forward to the command after the matching 
-.Sy \&]
+.Sy l
 token.
-.It Sy \&]
+.It Sy l
 If the byte at the data pointer is nonzero, then instead of moving the instruction pointer forward to the next command, jump it back to the command after the matching 
-.Sy \&[
+.Sy h
 token.
 .El
 .Sh FLAGS
