@@ -1,6 +1,10 @@
 The HTML Programming Language
 =============================
-Html interpreter written in C.
+HTML interpreter written in C.
+
+The HTML programming language and allows you to write programs soley with the letters H,T,M, and L (case-sensitive).
+It is based on the brainfuck programming language, and thus allows the experienced brainfuck programmer a quick adaption.
+
 
 ## Usage
     html [-veh] file...
