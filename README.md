@@ -41,7 +41,7 @@ authors of these programs where possible.
 ## Getting the source
 Download the source code by running the following code in your command prompt:
 ```sh
-$ git clone https://github.com/jb--/brainfuck.git
+$ git clone https://github.com/jb--/html.git
 ```
 or simply [grab](https://github.com/jb--/html/archive/master.zip) a copy of the source code as a Zip file.
 
