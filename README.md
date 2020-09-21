@@ -61,7 +61,7 @@ and finally, build it using the building system you chose (e.g. Make):
 $ make
 ```
 
-## Attribution
+## Attribution and relation to brainfuck
 
 The HTML programming language is based on the implementation of the brainfuck interpreter by [Fabian Mastenbroek](https://github.com/fabianishere/brainfuck). The intention behind this project is that next time someone mentions that HTML is not a programming language, I can prove them wrong.
 
@@ -70,6 +70,19 @@ You can convert many brainfuck programs to HTML programs by running
 $ sed -i ''  -e 's/>/L/g' -e 's/</H/g' -e 's/\+/t/g' -e 's/\-/m/g' -e 's/\./T/g' -e 's/,/M/g' -e 's/\[/h/g' -e 's/\]/l/g' *.bf
 ```
 on your brainfuck source file. 
+
+Brainfuck token | HTML token | Description
+--------------- | ---------- | ------------
+ `>` | `L` | increment the data pointer 
+ `<` | `H` | decrement the data pointer
+ `+` | `t` | increment the byte at the data pointer
+ `-` | `m` | decrement the byte at the data pointer
+ `.` | `T` | output the byte at the data pointer
+ `,` | `M` | accept one byte of input
+ `[` | `h` | if the byte at the data pointer is zero, then jump the instruction pointer forward to the command after the matching `]` command
+ `]` | `l` | if the byte at the data pointer is nonzero, then jump the instruction pointer backward to the command after the matching `[` command
+
+
 
 ## License
 The code is released under the Apache License version 2.0. See [LICENSE.txt](/LICENSE.txt).
